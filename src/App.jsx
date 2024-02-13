@@ -1,20 +1,22 @@
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Homepage from './pages/HomePage'
+import Footer from './Components/Footer'
+import Login from './pages/Login'
 
-const HomePage = () => {
-  return <h1 className='font-bold text-4xl text-blue-800 '>Hello world!</h1>
-}
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='' element={<HomePage></HomePage>}/>
+        <Route path='/' element={<Homepage></Homepage>}/>
+        <Route path='/login' element={<Login></Login>}/>
       </Routes>
+      {/* Footer */}
+      <Footer></Footer>
     </BrowserRouter>
   )
 }
