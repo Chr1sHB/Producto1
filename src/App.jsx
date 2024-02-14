@@ -1,19 +1,19 @@
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
-import { useState } from 'react'
-import './App.css'
 import Homepage from './pages/HomePage'
 import Footer from './Components/Footer'
 import Login from './pages/Login'
+import CreateTaskPage from './pages/CreateTask'
+import Reports from './Components/Reports'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Homepage></Homepage>}/>
-        <Route path='/login' element={<Login></Login>}/>
+        <Route path='/' element={<Homepage/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/create-task' element={<CreateTaskPage/>}/>
+        <Route path='/reports' element={<Reports/>}/>
       </Routes>
       {/* Footer */}
       <Footer></Footer>
