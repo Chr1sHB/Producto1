@@ -1,8 +1,75 @@
 import { useEffect, useState } from "react";
 import { AiOutlineLogout } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Task from "./Task";
+import { getAuth } from "firebase/auth";
+import { QuerySnapshot, collection, getFirestore, onSnapshot, query, where } from "firebase/firestore";
+import app from "../firebase/firebaseConfig";
+
+//Get Auth from User Account
+const auth = getAuth(app);
+console.log(auth);
+//Get DB
+const db = getFirestore(app)
+
 
 function Reports() {
+
+  //States
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [tasks, setTasks] = useState([]);
+  const [thisWeekTotal, setWeekTotal] = useState(0);
+  const [thisMonthTotal, setMonthTotal] = useState(0);
+  const [totalTime, setTotalTime] = useState(0);
+
+  //Fetching the data of the tasks
+
+  useEffect ( () => {
+    const fetchData = () => {
+      try {
+        setLoading(true);
+        setError(null);
+        //Check if the user has logged in
+        if (auth.currentUser){
+          console.log("User logged in");
+          const q = query(collection(db,"tasks"), where('userId',"==", auth.currentUser.uid));
+          //Snapshot 
+          const unSuscribe = onSnapshot(q,(querySnapshot)=>{
+            setTasks(
+              querySnapshot.docs.map((doc)=>{
+                return {
+                  ...doc.data(),
+                  id: doc.id,
+                  date: new Date(doc.data().startTime).toISOString(),
+                }
+              })
+            );
+          });
+        }
+        else { 
+          setError('Please log into your Account');
+          setLoading(false); 
+        }
+
+      }
+      catch (err) {
+        setError(err.message);
+        setLoading(false);
+        return () => {};
+      }
+    };
+
+    const unSubscribe = fetchData();
+
+    return () => {
+      if (unSubscribe) {
+        unSubscribe();
+      }
+    }
+    
+  },[]);
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-400 to-blue-500">
       <div className="container mx-auto px-4 py-10">
@@ -52,7 +119,11 @@ function Reports() {
             </button>
           </div>
 
-          <div className="space-y-4">{/* Task here */}</div>
+          <div className="space-y-4">
+            {tasks.map((task) =>(
+              <Task key={task.id} task={task} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import Footer from './Components/Footer'
 import Login from './pages/Login'
 import CreateTaskPage from './pages/CreateTask'
 import Reports from './Components/Reports'
+import PrivateRoute from './Components/PrivateRoot'
 
 
 function App() {
@@ -13,7 +14,11 @@ function App() {
         <Route path='/' element={<Homepage/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/create-task' element={<CreateTaskPage/>}/>
-        <Route path='/reports' element={<Reports/>}/>
+        <Route path='/reports' element={
+          <PrivateRoute>
+            <Reports/>
+          </PrivateRoute>
+        }/>
       </Routes>
       {/* Footer */}
       <Footer></Footer>
