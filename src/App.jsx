@@ -13,6 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Login/>}/>
         <Route path='/create-task' element={<CreateTaskPage/>}/>
         <Route path='/reports' element={
           <PrivateRoute>

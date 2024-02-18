@@ -40,8 +40,8 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full lg:w-1/2 px-4">
-              <img className="block mx-auto xl:mx-0" src={task} alt="task" />
+            <div className="w-full lg:w-1/2 px-4 pt-8">
+              <iframe width="620" height="360" className="block mx-auto xl:mx-0" src="https://www.youtube.com/embed/reyp4HGdJMU?si=TgvZIaxZH7FuANpT&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
           </div>
           <a className="inline-block text-gray-900" href="#">
@@ -196,11 +196,6 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-        {/* <img
-          className="block w-full lg:hidden mt-16 object-cover"
-          src="https://shuffle.dev/acros-assets/images/features/woman-man-smilling.jpg"
-          alt
-        /> */}
       </section>
     </div>
   );

@@ -12,7 +12,7 @@ import {
 import {FaCheck, FaTimes} from "react-icons/fa"
 import app from "../firebase/firebaseConfig";
 import { getFirestore,updateDoc,onSnapshot,doc, deleteDoc } from "firebase/firestore";
-
+import PropTypes from "prop-types";
 //Firestore Instance
 const db = getFirestore(app);
 
@@ -158,6 +158,10 @@ function Task( { task} ) {
       </div>
     </div>
   );
+}
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired
 }
 
 export default Task;
